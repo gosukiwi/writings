@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO List app</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>TODO List app</h1>
+
+        <p><input type="text" id="new-item" placeholder="What do you have to do?" />
+        <input type="button" value="Add" id="btn-add" onclick="javascript:TODO_GLOBALS.addTodoItem()" /></p>
+
+        <ul id="todo-container">
+            <li>
+                <input type="checkbox" checked="checked" />
+                Item 1
+                <a href="#">x</a>
+            </li>
+            <li>
+                <input type="checkbox" />
+                Item 1
+                <a href="#">x</a>
+            </li>
+            <li>
+                <input type="checkbox" />
+                Item 1
+                <a href="#">x</a>
+            </li>
+        </ul>
+
+        <p>
+            3 items in total, 1 checked.
+        </p>
+
+        <script type="text/javascript">
+            // Global variables for event handling
+            var TODO_GLOBALS = {};
+
+            TODO_GLOBALS.addTodoItem;
+        </script>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
+</html>
