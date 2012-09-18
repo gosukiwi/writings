@@ -120,10 +120,11 @@ Great! If you try and run your HTML file now, and press the ```add``` button, it
 ![Screenshot 1](/res/3.jpg)
 
 Okay, let's now make the button do something useful, the button shall
-    * Read the input's value
-    * Create a model object to represent the value
-    * Add the model to the array
-    * Clear the input's text
+
+ *  Read the input's value
+ *  Create a model object to represent the value
+ *  Add the model to the array
+ *  Clear the input's text
 
 The code is pretty straight forward, and it's explained, we use ```document.getElementById``` to get the HTML element by it's id attribute, and be able to manipulate it.
 
