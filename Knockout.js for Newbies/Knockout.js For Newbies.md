@@ -101,7 +101,7 @@ I again added an attribute, but this time the attribute is ```onclick```, this m
 
 Let's add a little script with global variables to handle our events in out javascript code, it's very important to avoid global variables as much as possible, but whenever you *have to* use them, wrap them in an object, so that object contains *all* your global values. This is because all Javascript apps share the same global space, and we want to minimize conflicts as much as possible.
 
-<pre>&lt;script type=&quot;text/javascript&quot;&gt;<br/>            // Global variables for event handling<br/>            var TODO_GLOBALS = {};<br/><br/>            TODO_GLOBALS.addTodoItem;<br/>        &lt;/script&gt;<br/>        &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</pre>
+<pre>&lt;script type=&quot;text/javascript&quot;&gt;<br/>    // Global variables for event handling<br/>    var TODO_GLOBALS = {};<br/><br/>    TODO_GLOBALS.addTodoItem;<br/>&lt;/script&gt;<br/>&lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</pre>
 
 All good! Now we need to add the function definition at the end of our ```app.js``` file
 
