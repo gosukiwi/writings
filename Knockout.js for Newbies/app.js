@@ -17,7 +17,13 @@
         item_2 = new TodoItem('Finish this tutorial'),
 
         // this function will draw our todo items
-        drawItems;
+        drawItems,
+
+        // event handler for the checkbox click event
+        updateTodoItem,
+
+        // event handler for the delete item link
+        deleteTodoItem;
 
     // add them to our array
     itemsArray.push(item_1);
@@ -47,16 +53,39 @@
         drawItems();
     };
 
+    updateTodoItem = function () {
+        var index = this.id;
+        itemsArray[index].checked = this.checked;
+
+        // draw the items
+        drawItems();
+    };
+
+    deleteTodoItem = function () {
+        var index = this.id;
+        itemsArray.splice(index, 1);
+
+        // draw the items
+        drawItems();
+    };
+
     drawItems = function () {
         var listContainer = document.getElementById('todo-container'),
-            i,      // will be used in the for loop
-            li,     // <li /> item
-            text;   // text node, for the <li />
+            i,          // will be used in the for loop
+            li,         // <li /> item
+            text,       // text node, for the <li />
+            checkbox,   // checkbox input
+            link,       // delete link
+            p,
+            checkedItems;
 
         // clear all the items
         while (listContainer.firstChild) {
             listContainer.removeChild(listContainer.firstChild);
         }
+
+        // set the checkedItems variable to 0, this variable will hold the ammount of checked items in the array
+        checkedItems = 0;
 
         // now add all the items 
         for (i = 0; i < itemsArray.length; i += 1) {
@@ -65,12 +94,40 @@
             // create text
             text = document.createTextNode(itemsArray[i].name);
 
+            // create checkbox input
+            checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.onclick = updateTodoItem;
+            checkbox.id = i; // we will use the id attribute to store the index of the model
+
+            if (itemsArray[i].checked) {
+                checkbox.checked = 'checked';
+                checkedItems += 1;
+            }
+
+            link = document.createElement('a');
+            link.onclick = deleteTodoItem;
+            link.id = i;
+            link.href = '#';
+            link.appendChild(document.createTextNode('x'));
+
+            // add the checkbox
+            li.appendChild(checkbox);
+
             // add text to the li
             li.appendChild(text);
+
+            // add the link
+            li.appendChild(link);
 
             // add li to the ul
             listContainer.appendChild(li);
         }
+
+        // update the text of the status paragraph
+        p = document.getElementById('status');
+        p.removeChild(p.firstChild);
+        p.appendChild(document.createTextNode(itemsArray.length + ' items in total, ' + checkedItems + ' checked.'));
     };
 
     // call the draw items function, drawing all the todo items in the array
