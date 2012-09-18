@@ -99,9 +99,11 @@ Let's now bind the click event, there are several ways to do this, as we will us
 
 I again added an attribute, but this time the attribute is ```onclick```, this means, when the item is clicked, it will call the addTodoItem Javascript method of the TODO_GLOBALS object, of course, we have yet to define this method. 
 
-Let's add a little script with global variables to handle our events in out javascript code, it's very important to avoid global variables as much as possible, but whenever you *have to* use them, wrap them in an object, that object will contain all your global values. This is because all Javascript apps share the same global space, and we want to minimize conflicts as much as possible.
+Let's add a little script with global variables to handle our events in out javascript code, it's very important to avoid global variables as much as possible, but whenever you *have to* use them, wrap them in an object, so that object contains *all* your global values. This is because all Javascript apps share the same global space, and we want to minimize conflicts as much as possible.
 
-Let's add the function definition at the end of the Javascript file
+<pre>&lt;script type=&quot;text/javascript&quot;&gt;<br/>            // Global variables for event handling<br/>            var TODO_GLOBALS = {};<br/><br/>            TODO_GLOBALS.addTodoItem;<br/>        &lt;/script&gt;<br/>        &lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</pre>
+
+All good! Now we need to add the function definition at the end of our ```app.js``` file
 
 <pre>
     // ... more code
@@ -113,7 +115,7 @@ Let's add the function definition at the end of the Javascript file
 }());
 </pre>
 
-If you try and run your HTML file now, and press the ```add``` button, it will write 'Click!' on the Javascript console, you can press F12 to open the development panel in most modern browsers, and then navigate to the console to see this message. In chrome, it looks like this.
+Great! If you try and run your HTML file now, and press the ```add``` button, it will write 'Click!' on the Javascript console, you can press F12 to open the development panel in most modern browsers, and then navigate to the console to see this message. In chrome, it looks like this.
 
 ![Screenshot 1](/res/3.jpg)
 
