@@ -220,6 +220,32 @@ In this tutorial we will use the MVVM pattern, which is one of the simplest beca
 
 The idea behind this is simple, we have two layers, the View layer, and the Model layer, the view layer is "everything related with what you can see", so in this case, is the HTML markup, and the model, is what defines the entities that our app handles, and the logic behind them. The only logic the View has is about how to display the model data.
 
+## Implementing MVVM
+
+Our implementation of MVVM will be quite simple, the HTML file will be our view, and the Javascript file will be our model.
+The view will be able to communicate with the a model object, and every time the view changes, this model will be notified.
+The model will be able to communicate with the view, and every time the model changes, the view will be updated to match.
+
+Note that the view updates itself automatically, on the other hand, we have to work a bit more on the model, adding logic.
+
+Let's create a simple example in pseudo-code.
+
+*HTML File*
+
+<pre>&lt;strong&gt;Name&lt;/strong&gt; &lt;span bind=&quot;name&quot;&gt;&lt;/span&gt;</pre>
+
+In that view, we bind the *name* attribute of our model to a span item, so the span will display our attribute, if we were to change it sometime in our app excecution, this value will be updated automatically.
+
+*Javascript File*
+
+<pre>var model = {
+    name: 'Mike'
+};</pre>
+
+The application should now display "Name: Mike".
+
+# Rewriting our app with Knockout.js
+
 Let's start by rewriting our Javascript, ```knockout-app.js``` will be the file name we'll use for the Knockout.js application
 
 <pre>(function () {
