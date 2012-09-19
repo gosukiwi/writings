@@ -214,6 +214,86 @@ One good thing though, it's we have somehow separated our view logic from our bu
 
 So basically, a design pattern is an approeach we use to solve a problem, when you know the approach, it's easier to remember how you solved the problem, or to see how others solved it, it's useful for maintaining code and work with other programmers.
 
-In this tutorial we will use the MVVM pattern, which is one of the simplest because it only has two laters, the Model and the View, other common patterns are MVC and MVP. Let's talk more about MVVM.
+In this tutorial we will use the MVVM pattern, which is one of the simplest because it has only two layers, the Model and the View, other common patterns are MVC and MVP. Let's talk more about MVVM.
 
 > The Model View ViewModel (MVVM) is an architectural pattern used in software engineering that originated from Microsoft as a specialization of the presentation model design pattern introduced by Martin Fowler. Largely based on the model–view–controller pattern (MVC), MVVM is targeted at modern UI development platforms which support Event-driven programming, such as HTML5 [...].
+
+The idea behind this is simple, we have two layers, the View layer, and the Model layer, the view layer is "everything related with what you can see", so in this case, is the HTML markup, and the model, is what defines the entities that our app handles, and the logic behind them. The only logic the View has is about how to display the model data.
+
+Let's start by rewriting our Javascript, ```knockout-app.js``` will be the file name we'll use for the Knockout.js application
+
+<pre>(function () {
+    "use strict";
+}());</pre>
+
+Nothing new here, let's define our TodoItem class, it will be *very* similar to the one we had before.
+
+<pre>// define a todo model "class"
+TodoItem = function (name) {
+    this.name = ko.observable(name || '');
+    this.checked = ko.observable(false);
+};</pre>
+
+As you can see, the only real difference is that we wrap our attributes in a function, ko.observable function, ```ko``` is the namespace of Knockout.js, so we are calling the observable function of Knockout.js, what this does is track the attribute state, whenever the attribute change, the view will be notified, and also if the view displays this attribute, when the user modifies the view (for example, he sets the checked attribute to true by clicking in the checkbox), it will update the model.
+
+This is a very simple way to bind attributes, it doesn't make you extend a custom model class, all you have to do, is create a special attribute in your old regular javascript object, and that's it!
+
+We can then create items as usual
+
+<pre>var item = new TodoItem('Write a book');</pre>
+
+But there are some differences, we have to user a special getter and setter for the attribute now, it's nothing fancy though
+
+<pre>var name = item.name(); //getter
+item.name('Get healthier'); // setter</pre>
+
+It's a very common mistake to forget this, so if something doesn't work, this might be the reason! Because if you try to access the property as an usual property, you will be returned a function, not the value itself!
+
+Let's now create another constructor object, or class, as you might rather call it, an instance of this object will be binded to the view, so the view will have access to that object, and only that object.
+
+<pre>TodoListViewModel = function () {
+    var self = this;
+};</pre>
+
+It's a convention in Knockup.js to have a reference to the internal ```this``` variable, in a variable called ```self```, this can then be used to make reference to the TodoListViewModel from nested functions inside the object.
+
+So far, so good, finally, let's start Knockout.js by actually bind the ```TodoListViewModel``` with the view.
+
+<pre>ko.applyBindings(new TodoListViewModel());</pre>
+
+You should have something like this by now
+
+<pre>(function () {
+    "use strict";
+
+    var TodoItem,
+        TodoListViewModel;
+
+    // define a todo model "class"
+    TodoItem = function (name) {
+        this.name = ko.observable(name || '');
+        this.checked = ko.observable(false);
+    };
+
+    // the view model coordinates the view and the model
+    // the view can see this object
+    TodoListViewModel = function () {
+        var self = this;
+    };
+
+    ko.applyBindings(new TodoListViewModel());
+}());</pre>
+
+Let's now prepare our view for Knockout!
+
+<pre>&lt;p&gt;&lt;input type=&quot;text&quot; data-bind=&quot;value: newTodoName&quot; placeholder=&quot;What do you have to do?&quot; /&gt;<br/>&lt;input type=&quot;button&quot; value=&quot;Add&quot; data-bind=&quot;click: addItem&quot; /&gt;&lt;/p&gt;</pre>
+
+As you can see, we have removed the ```id``` attribute, and added a ```data-bind``` attribute, this attribute is composed of a binding, followed by a semi-colon, followed by the arguments of the binding, several bindings can be separated with a comma.
+
+<pre>binding: params</pre>
+
+For example
+
+<pre>click: addItem</pre>
+
+What's a binding? A binding is

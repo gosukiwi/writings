@@ -7,26 +7,19 @@
     <body>
         <h1>TODO List app</h1>
 
-        <p><input type="text" id="new-item" placeholder="What do you have to do?" />
-        <input type="button" value="Add" id="btn-add" onclick="javascript:TODO_GLOBALS.addTodoItem()" /></p>
+        <p><input type="text" data-bind="value: newTodoName" placeholder="What do you have to do?" />
+        <input type="button" value="Add" data-bind="click: addItem" /></p>
 
         <ul data-bind="foreach: items">
             <li>
-                <!-- ko if: checked === true -->
-                    <input type="checkbox" checked="checked" data-bind="click: $root.updateItem" />
-                <!-- /ko -->
-                <!-- ko if: checked !== true -->
-                    <input type="checkbox" data-bind="click: $root.updateItem" />
-                <!-- /ko -->
-
+                <input type="checkbox" data-bind="checked: checked" />
                 <span data-bind="text: name"></span>
-
                 <a href="#" data-bind="click: $root.removeItem">x</a>
             </li>
         </ul>
 
-        <p id="status">
-            3 items in total, 1 checked.
+        <p>
+            <span data-bind="text: items().length"></span> items in total, <span data-bind="text: $root.checkedItems"></span> checked.
         </p>
 
         <script type="text/javascript" src="knockout-2.1.0.js"></script>
