@@ -260,3 +260,12 @@ We also use another trick here, we call the ```bind``` method of ```setState```,
 <pre><code>self.setState = function (state) {
 	self.currentState(state);
 };</code></pre>
+
+And that's it! Our app is now completed, there are of course a lot of details you could work on to better understand KO!
+
+## Extending the example
+
+Here are some ideas for you to extend the TODO List
+
+	* Add the functionality to edit a TODO item
+	* Add the functionality to edit a user
