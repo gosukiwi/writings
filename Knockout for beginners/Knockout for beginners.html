@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Knockout APP</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<!-- View Markup -->
+	<div id="todo-list" data-bind="visible: $root.currentState() === 'TODO'">
+		<h1>TODO List</h1>
+
+		<p>
+			New Item: 
+			<input type="text" data-bind="value: newItemDescription">
+			<select name="" id="" data-bind="options: people, optionsText: 'name', value: chosenPerson">
+			</select>
+			<input type="button" data-bind="click: addItem" value="Add">
+		</p>
+
+		<ul id="todo-list" data-bind="foreach: items">
+			<li>
+				<input type="checkbox" data-bind="checked: checked" />
+				<strong data-bind="text: person.name"></strong>: <span data-bind="text: description"></span> 
+				<a href="#" data-bind="click: $root.deleteItem">x</a>
+			</li>
+		</ul>
+
+		<p><span data-bind="text: checkedItems"></span>/<span data-bind="text: totalItems"></span> items checked</p>
+
+		<p><a href="#" data-bind="click: setState.bind($data, 'USERS')">Manage Users</a></p>
+	</div>
+
+	<div id="manage-users" data-bind="visible: $root.currentState() === 'USERS'">
+		<h1>Users</h1>
+
+		<p>
+			New User: 
+			<input type="text" data-bind="value: newUserName">
+			<input type="button" value="Add" data-bind="click: addNewUser">
+		</p>
+
+		<ul id="todo-list" data-bind="foreach: people">
+			<li><span data-bind="text: name"></span> <a data-bind="click: $root.deletePerson" href="#">x</a></li>
+		</ul>
+
+		<p><a href="#" data-bind="click: setState.bind($data, 'TODO')">Manage TODO items</a></p>
+	</div>
+	<!-- End of View Markup -->
+
+	<script type="text/javascript" src="knockout-2.1.0.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+* {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+ul#todo-list {
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+}
+
+ul#todo-list li {
+	dispaly: block;
+	position: relative;
+	list-style-type: none;
+	background-color: #ddd;
+	margin: 10px 0px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+ul#todo-list li:hover {
+	background-color: #ccc;
+}
+
+ul#todo-list li a {
+	position: absolute;
+	right: 10px;
+}
