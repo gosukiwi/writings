@@ -116,6 +116,8 @@ person.name; // undefined
 And that's it! There are a lot of related topics, like inheritance, and the 
 *this* keyword, but for now I think this is enough. I hope it helped!
 
+Want to know more about closures? [This is a good starting point!](http://docs.webplatform.org/wiki/tutorials/closures)
+
 ## NOTE: About scopes
 Scopes in Javascript are very easy, in the example shown, the var _name_ and
 _methods_ are scoped inside the myObj function, so anything from outside can't 
